@@ -1,0 +1,408 @@
+# =============================================================================
+# .gitignore for Seurat Pipeline
+# =============================================================================
+#
+# This file tells Git which files to ignore (not track in version control)
+#
+# Created by: Ji (gynecoloji)
+# Date: 2025-01-03
+#
+# =============================================================================
+
+# =============================================================================
+# R Files
+# =============================================================================
+
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data files
+.RData
+.RDataTmp
+
+# User-specific files
+.Ruserdata
+
+# Example code in package build process
+*-Ex.R
+
+# Output files from R CMD build
+/*.tar.gz
+
+# Output files from R CMD check
+/*.Rcheck/
+
+# RStudio files
+.Rproj.user/
+*.Rproj
+
+# produced vignettes
+vignettes/*.html
+vignettes/*.pdf
+
+# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+.httr-oauth
+
+# knitr and R markdown default cache directories
+*_cache/
+/cache/
+
+# Temporary files created by R markdown
+*.utf8.md
+*.knit.md
+
+# R Environment Variables
+.Renviron
+
+# translation temp files
+po/*~
+
+# RStudio Connect folder
+rsconnect/
+
+# =============================================================================
+# Data Files (Don't commit large datasets)
+# =============================================================================
+
+# Raw data
+data/*.rds
+data/*.RDS
+data/*.h5
+data/*.h5ad
+data/*.h5seurat
+data/*.loom
+data/*.csv
+data/*.tsv
+data/*.txt
+data/*.fastq
+data/*.fastq.gz
+data/*.bam
+data/*.sam
+
+# But keep example/test data if small
+!data/example_*.rds
+!data/test_*.rds
+
+# Keep .gitkeep files to preserve directory structure
+!data/.gitkeep
+!**/.gitkeep
+
+# =============================================================================
+# Results and Outputs (Don't commit generated files)
+# =============================================================================
+
+# All results
+results/
+!results/.gitkeep
+
+# QC outputs
+qc/
+plots/
+figures/
+
+# Processed objects
+objects/
+*.processed.rds
+*.filtered.rds
+*.final.rds
+
+# MultiQC reports
+*_multiqc_report.html
+multiqc_data/
+
+# Summary files (these can be large)
+*_summary.csv
+*_statistics.csv
+
+# But keep example outputs in documentation
+!examples/example_output/
+!docs/example_results/
+
+# =============================================================================
+# Logs
+# =============================================================================
+
+# All log files
+logs/
+*.log
+*.out
+*.err
+
+# SLURM output
+slurm-*.out
+slurm-*.err
+
+# But keep log directory structure
+!logs/.gitkeep
+
+# =============================================================================
+# Containers (These are HUGE - don't commit!)
+# =============================================================================
+
+# Singularity images
+*.sif
+*.simg
+*.img
+
+# Docker images (shouldn't be in repo anyway, but just in case)
+*.tar
+*.tar.gz
+containers/*.tar
+containers/*.tar.gz
+
+# But keep containers directory
+!containers/
+!containers/.gitkeep
+
+# =============================================================================
+# Reference Files (Usually too large)
+# =============================================================================
+
+# Genome references
+ref/*.fa
+ref/*.fasta
+ref/*.gtf
+ref/*.gff
+ref/*.bed
+ref/*.2bit
+
+# HISAT2 indices
+ref/*.ht2
+ref/*.ht2l
+
+# Salmon indices
+ref/Salmon_index_*/
+ref/salmon_index/
+
+# But keep reference directory structure
+!ref/.gitkeep
+!ref/ENSEMBL/.gitkeep
+!ref/Salmon_index_Grch38/.gitkeep
+!ref/Salmon_index_decoy_Grch38/.gitkeep
+
+# =============================================================================
+# Temporary Files
+# =============================================================================
+
+# General temp files
+tmp/
+temp/
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# R temporary files
+.Rproj.user
+.Rhistory
+.RData
+
+# =============================================================================
+# IDE and Editor Files
+# =============================================================================
+
+# RStudio
+.Rproj.user/
+*.Rproj
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.*.sw?
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# JetBrains IDEs (PyCharm, IntelliJ, etc.)
+.idea/
+*.iml
+*.iws
+
+# =============================================================================
+# OS-Specific Files
+# =============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Linux
+.directory
+.Trash-*
+
+# =============================================================================
+# Package Manager Files
+# =============================================================================
+
+# Conda
+.conda/
+conda-meta/
+
+# Python (if any Python scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Node (if any web components)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =============================================================================
+# Documentation Build Files
+# =============================================================================
+
+# pkgdown site
+docs/
+_site/
+
+# Bookdown
+_book/
+_bookdown_files/
+
+# =============================================================================
+# Testing
+# =============================================================================
+
+# Test outputs (but keep the test code!)
+tests/testthat/_snaps/
+tests/testthat/*.Rout
+tests/testthat/*.Rout.fail
+
+# Coverage reports
+coverage/
+*.coverage
+
+# =============================================================================
+# Config Files (Sensitive)
+# =============================================================================
+
+# Don't commit files with credentials or sensitive info
+*.secret
+*.key
+.env
+.env.local
+
+# Personal config files (but keep default_config.yaml)
+config/personal_*.yaml
+config/local_*.yaml
+config/*_secret.yaml
+
+# =============================================================================
+# Backup Files
+# =============================================================================
+
+*.bak
+*.backup
+*.old
+*.orig
+*-old
+*-backup
+
+# =============================================================================
+# Archives
+# =============================================================================
+
+*.zip
+*.rar
+*.7z
+*.gz
+*.bz2
+*.xz
+
+# But keep small example archives if needed
+!examples/*.zip
+
+# =============================================================================
+# Large Binary Files
+# =============================================================================
+
+# Images (plots should be regenerated)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tiff
+
+# But keep documentation images
+!docs/images/*.png
+!docs/figures/*.png
+!README_files/*.png
+!*.diagram.png
+
+# PDFs (usually generated)
+*.pdf
+
+# But keep documentation PDFs
+!docs/*.pdf
+!manuals/*.pdf
+
+# =============================================================================
+# Benchmarking and Profiling
+# =============================================================================
+
+*.Rprof
+Rprof.out
+*.prof
+
+# =============================================================================
+# CI/CD
+# =============================================================================
+
+# GitHub Actions artifacts
+.github/workflows/*.log
+
+# =============================================================================
+# Custom Exclusions (Project-Specific)
+# =============================================================================
+
+# Job submission scripts with personal info
+scripts/submit_personal_*.sh
+
+# Large intermediate files
+*.intermediate.rds
+intermediate/
+
+# Session info (regenerated each time)
+*_sessionInfo.txt
+
+# Pipeline run metadata
+pipeline_runs/

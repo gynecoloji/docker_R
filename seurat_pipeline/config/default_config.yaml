@@ -1,0 +1,191 @@
+# =============================================================================
+# Seurat Pipeline Configuration
+# =============================================================================
+# 
+# This configuration file controls all parameters for the single-cell RNA-seq
+# analysis pipeline. Modify values as needed for your analysis.
+#
+# Author: Ji (gynecoloji)
+# Date: 2025-01-03
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# General Settings
+# -----------------------------------------------------------------------------
+general:
+  project_name: "scRNAseq_analysis"
+  species: "human"  # "human" or "mouse"
+  random_seed: 42
+  verbose: true
+
+# -----------------------------------------------------------------------------
+# Input/Output Paths
+# -----------------------------------------------------------------------------
+paths:
+  input_data: "data/raw_data.rds"  # Path to input Seurat object or matrix
+  output_dir: "results"
+  log_file: "logs/pipeline.log"
+  
+  # Subdirectories (will be created automatically)
+  qc_dir: "results/qc"
+  processing_dir: "results/processing"
+  plots_dir: "results/plots"
+  final_objects_dir: "results/objects"
+
+# -----------------------------------------------------------------------------
+# Quality Control Parameters
+# -----------------------------------------------------------------------------
+qc:
+  # QC metric thresholds
+  min_umi: 500
+  min_genes: 300
+  max_mito: 25  # Maximum mitochondrial percentage
+  min_complexity: 0.8  # Minimum log10(genes per UMI)
+  
+  # Gene filtering
+  min_cells_per_gene: 10  # Minimum cells a gene must be expressed in
+  
+  # Species-specific patterns
+  mito_pattern: "^MT-"  # Human mitochondrial genes
+  ribo_pattern: "^RP[SL]"  # Ribosomal genes
+  
+  # Plotting
+  save_qc_plots: true
+  plot_width: 8
+  plot_height: 7
+
+# -----------------------------------------------------------------------------
+# Processing Parameters
+# -----------------------------------------------------------------------------
+processing:
+  # Normalization
+  normalization_method: "LogNormalize"
+  scale_factor: 10000
+  
+  # Feature selection
+  selection_method: "vst"
+  n_features: 3000
+  
+  # Scaling
+  scale_all_genes: true
+  vars_to_regress:
+    - "nCount_RNA"
+    - "percent.mt"
+  
+  # Cell cycle
+  regress_cell_cycle: true
+  
+  # PCA
+  n_pcs: 50
+  
+  # Clustering
+  dims_use: 30
+  resolution: 0.5
+  algorithm: 1  # 1 = Louvain, 2 = Louvain with multilevel refinement
+  
+  # Dimensionality reduction
+  run_umap: true
+  run_tsne: true
+  umap_dims: 30
+  tsne_dims: 30
+  
+  # JackStraw (computationally expensive, usually not necessary)
+  run_jackstraw: false
+  jackstraw_replicates: 100
+  
+  # Parallel processing
+  n_cores: 4
+  future_gb: 10  # Memory per worker in GB
+
+# -----------------------------------------------------------------------------
+# Batch Correction Parameters
+# -----------------------------------------------------------------------------
+batch_correction:
+  # Enable batch correction
+  enabled: false
+  
+  # Batch variable (column name in metadata)
+  batch_var: "orig.ident"
+  
+  # Method: "harmony", "CCA", "RPCA", or "SCTransform"
+  method: "harmony"
+  
+  # Dimensions
+  dims: 30
+  
+  # Clustering after batch correction
+  resolution: 0.5
+  
+  # Variables to regress
+  vars_to_regress:
+    - "percent.mt"
+  
+  # Harmony-specific parameters
+  harmony:
+    theta: null  # null for automatic
+    lambda: null  # null for automatic
+    max_iter: 10
+  
+  # CCA/RPCA parameters
+  integration:
+    k_anchor: 5
+    k_filter: 200
+    k_score: 30
+  
+  # SCTransform parameters
+  sct:
+    n_genes: 3000
+    vars_to_regress:
+      - "percent.mt"
+  
+  # Output
+  run_umap: true
+  run_tsne: true
+  
+  # Parallel processing
+  n_cores: 4
+  future_gb: 10
+
+# -----------------------------------------------------------------------------
+# Visualization Parameters
+# -----------------------------------------------------------------------------
+plotting:
+  # General plotting settings
+  point_size: 0.5
+  label_clusters: true
+  plot_width: 12
+  plot_height: 5
+  
+  # Genes to visualize (examples - modify as needed)
+  marker_genes:
+    - "CD3D"    # T cells
+    - "CD79A"   # B cells
+    - "CD14"    # Monocytes
+    - "FCGR3A"  # NK cells
+    - "MS4A1"   # B cells
+  
+  # Save plots automatically
+  save_plots: true
+  
+  # Plot formats
+  formats:
+    - "pdf"
+    - "png"
+
+# -----------------------------------------------------------------------------
+# Output Options
+# -----------------------------------------------------------------------------
+output:
+  # Save intermediate objects
+  save_qc_object: true
+  save_processed_object: true
+  save_final_object: true
+  
+  # Compression for saved objects
+  compression: "gzip"
+  
+  # Save processing statistics
+  save_statistics: true
+  
+  # Save session info for reproducibility
+  save_session_info: true
