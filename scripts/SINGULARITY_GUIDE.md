@@ -335,58 +335,6 @@ logs/
 
 ---
 
-## 🐛 Troubleshooting
-
-### **Problem: "Container not found"**
-```bash
-# Solution: Build the container first
-bash scripts/build_singularity.sh
-```
-
-### **Problem: "Input file not found"**
-```bash
-# Check your bind mount includes the data directory
-singularity exec --bind $PWD:/workspace container.sif ls /workspace/data/
-
-# Verify file exists on host
-ls data/your_file.rds
-```
-
-### **Problem: "Permission denied"**
-```bash
-# Singularity runs as your user - check file permissions
-ls -lh data/
-chmod 644 data/*.rds  # Make readable
-```
-
-### **Problem: "Module not found" on HPC**
-```bash
-# Load the module first
-module load singularity
-
-# Or use full path to singularity
-/usr/bin/singularity exec ...
-```
-
-### **Problem: "Out of memory"**
-```bash
-# For HPC: Increase memory in SLURM script
-#SBATCH --mem=128G  # Increase from 64G
-
-# For local: Close other programs
-```
-
-### **Problem: "Cannot write to output directory"**
-```bash
-# Make sure output directory is in a bound location
-# Must be under $PWD if using --bind $PWD:/workspace
-
-mkdir -p results
-chmod 755 results
-```
-
----
-
 ## ⚡ Performance Tips
 
 ### **1. Use Local Scratch Space on HPC**
