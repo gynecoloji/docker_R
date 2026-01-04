@@ -25,69 +25,18 @@ A professional, containerized pipeline for single-cell RNA-seq data analysis usi
 - Comprehensive visualization suite
 - Flexible clustering parameters
 
-### Docker Integration
-- Extends the `bioinformatic_r_4_5_1` container
-- Docker Compose for easy orchestration
-- Volume mounting for data and results
-- Resource management built-in
-
----
-
-## 📁 Directory Structure
-
-```
-seurat_pipeline/
-├── R/                           # Core R functions
-│   ├── qc_functions.R          # Quality control
-│   ├── processing_functions.R  # Processing & batch correction
-│   ├── plotting_functions.R    # Visualization
-│   └── utils.R                 # Utilities & helpers
-├── config/                      # Configuration files
-│   └── default_config.yaml     # Default parameters
-├── examples/                    # Example workflows
-├── tests/                       # Unit tests
-├── run_seurat_pipeline.R       # Main workflow script
-├── Dockerfile                  # Docker build file
-├── docker-compose.yml          # Docker Compose config
-└── README.md                   # This file
-```
-
 ---
 
 ## 🚀 Quick Start
 
-### Option 1: Using Docker (Recommended)
-
-**Step 1: Build the container**
-```bash
-cd seurat_pipeline
-docker-compose build
-```
-
-**Step 2: Prepare your data**
-Place your input data in the `data/` directory:
-```bash
-# Example: data/my_data.rds (Seurat object)
-```
-
-**Step 3: Run the pipeline**
-```bash
-docker-compose run --rm seurat-pipeline \
-  Rscript /workspace/seurat_pipeline/run_seurat_pipeline.R \
-  --config config/default_config.yaml \
-  --input data/my_data.rds \
-  --output results \
-  --cores 4
-```
-
-### Option 2: Using the Base R Container
+### Option 1: Using the Base R Container
 
 ```bash
 # Pull the base container
-singularity pull docker://gynecoloji/bioinformatic_r_4_5_1:v1
+singularity pull docker://gynecoloji/bioinformatic_r_4_5_1:v2
 
 # Run pipeline
-singularity exec bioinformatic_r_4_5_1_v1.sif \
+singularity exec bioinformatic_r_4_5_1_v2.sif \
   Rscript seurat_pipeline/run_seurat_pipeline.R \
   --config config/default_config.yaml
 ```
@@ -256,51 +205,6 @@ Rscript examples/example_workflow.R
 
 ---
 
-## 🔧 Development
-
-### Adding New Features
-
-1. Create new functions in appropriate R module
-2. Add documentation using roxygen2 format
-3. Update configuration schema if needed
-4. Add tests
-5. Update README
-
-### Code Quality Checklist
-- [ ] Functions have input validation
-- [ ] Error handling implemented
-- [ ] Documentation added (roxygen2)
-- [ ] Logging integrated
-- [ ] Tests written
-- [ ] Configuration options added
-
----
-
-## 🐛 Troubleshooting
-
-**Issue: "Package 'harmony' not found"**
-```R
-# Install missing packages
-install.packages("harmony")
-```
-
-**Issue: Memory errors with large datasets**
-```yaml
-# Increase memory limits in config
-processing:
-  future_gb: 20  # Increase from default 10GB
-```
-
-**Issue: Slow processing**
-```yaml
-# Enable parallel processing
-processing:
-  n_cores: 8  # Use more cores
-  scale_all_genes: false  # Only scale variable features
-```
-
----
-
 ## 📚 Function Reference
 
 ### QC Functions
@@ -365,10 +269,10 @@ If you use this pipeline in your research, please cite:
 
 ```
 Ji. (2025). Production-Ready Seurat Pipeline for Single-Cell RNA-seq Analysis.
-GitHub: https://github.com/gynecoloji/SnakeMake_RNAseq
+GitHub: https://github.com/gynecoloji/docker_R
 ```
 
 ---
 
-**Last Updated**: January 2025  
+**Last Updated**: January 2026  
 **Version**: 1.0.0

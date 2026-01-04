@@ -89,7 +89,7 @@ docker_R/
 
 ```bash
 # 1. Navigate to your repository
-cd SnakeMake_RNAseq
+cd docker_R
 
 # 2. Create necessary directories
 mkdir -p containers scripts data results logs
