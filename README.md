@@ -19,6 +19,13 @@ Complete guide for using your existing Docker Hub image with Singularity to run 
 
 ---
 
+## prerequisite
+```bash
+# download github repo
+git clone https://github.com/gynecoloji/docker_R/tree/main
+```
+
+
 ## 🚀 Quick Start (3 Steps)
 
 ### **Step 1: Build Singularity Container**
@@ -89,7 +96,6 @@ docker_R/
 
 ```bash
 # 1. Navigate to your repository
-git clone https://github.com/gynecoloji/docker_R/tree/main
 cd docker_R
 
 # 2. Create necessary directories
