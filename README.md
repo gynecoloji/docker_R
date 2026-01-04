@@ -89,6 +89,7 @@ docker_R/
 
 ```bash
 # 1. Navigate to your repository
+git clone https://github.com/gynecoloji/docker_R/tree/main
 cd docker_R
 
 # 2. Create necessary directories
